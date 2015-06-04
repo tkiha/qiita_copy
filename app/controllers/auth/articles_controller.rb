@@ -20,7 +20,6 @@ class Auth::ArticlesController < ApplicationController
 
   def markdown_preview
     @markdown = params[:markdown]
-    p "aaaaaaa"
   end
 
   def new
