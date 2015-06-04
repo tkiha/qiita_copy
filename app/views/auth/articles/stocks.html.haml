@@ -1,0 +1,5 @@
+%h1
+  =@user.email
+  さんがストックした記事
+
+=render 'shared/article_list', articles: Article.stocked(@user)

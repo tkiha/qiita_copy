@@ -1,0 +1,9 @@
+%h1
+  =@user.email
+  さんのフィード
+  - if current_user.follow_user?(@user)
+    = render 'shared/unfollow', user: current_user, to_user:@user
+  - else
+    = render 'shared/follow', user: current_user, to_user:@user
+
+=render 'shared/article_list', articles: @user.feed

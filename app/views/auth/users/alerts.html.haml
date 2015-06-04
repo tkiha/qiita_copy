@@ -1,0 +1,17 @@
+%h1
+  =@user.email
+  さんへの通知
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Alert
+
+  %tbody
+    - @alerts = @user.alerts.order("created_at desc")
+    - @alerts.each do |alert|
+      %tr
+        %td= user_link_tag(User.find(alert.from_user_id))
+        %td= link_to alert.text, alert.url
+

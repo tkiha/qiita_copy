@@ -1,0 +1,5 @@
+%h1
+  =@user.email
+  さんのフォロワー
+
+=render 'shared/user_list', users: @user.follower_users

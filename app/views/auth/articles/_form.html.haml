@@ -1,0 +1,59 @@
+= nested_form_for [:auth, @user, @article] do |f|
+  - if @article.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
+      %ul
+        - @article.errors.full_messages.each do |msg|
+          %li= msg
+
+  - if @article.user_id == current_user.id
+    .field
+      = f.label :title
+      = f.text_field :title
+    .field
+      = f.label :text
+      %br
+      = f.text_area :text, cols:100, rows: 10, class: 'input_markdown'
+      %br
+      = link_to "プレビュー",'',class: 'markdown_preview'
+
+
+    %div.markdown_preview_result
+    .field
+      = f.label :tag_list, "タグ（カンマ区切り）"
+      = text_field_tag 'article[tag_list]', @article.tag_list.join(',')
+  - else
+    .field
+      = f.label :title
+      = @article.title
+    .field
+      = f.label :text
+      = markdown @article.text
+
+    .field
+      = f.label :tag_list, "タグ（カンマ区切り）"
+      = @article.tag_list.join(',')
+
+  - unless @article.new_record?
+    - @article.comments.build if @article.comments.blank?
+    %hr
+      %b= "コメント"
+      %th
+      = f.fields_for :comments do |comment|
+        -# TODO comment.object.new_record? || comment.object.user_id == current_user.id にしたい
+        - if comment.object.new_record? || comment.object.user_id == current_user.id
+          = comment.text_field :text
+          = comment.link_to_remove "削除"
+        - else
+          = comment.object.text
+          (#{comment.object.user.email})
+    = f.link_to_add "コメントを追加", :comments
+    %br
+  %hr
+
+
+  .actions
+    = f.submit 'Save'
+
+= form_tag({controller: :articles, action: :markdown_preview}, remote: true, class: 'preview_submit_form') do
+  = hidden_field_tag :markdown, '', class: 'hidden_markdown'

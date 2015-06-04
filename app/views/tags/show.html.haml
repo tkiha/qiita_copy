@@ -1,0 +1,8 @@
+%h1 タグ#{@tag}を持つ記事
+- if user_signed_in?
+  - if current_user.follow_tag?(@tag)
+    = render 'shared/unfollow_tag', user: current_user, tag_text: @tag
+  - else
+    = render 'shared/follow_tag', user: current_user, tag_text: @tag
+
+=render 'shared/article_list', articles: @articles

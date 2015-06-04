@@ -1,0 +1,13 @@
+6/2 14:00-17:00 3.0h
+6/3 10:00-15:30 4.5h
+6/4 10:00−16:30 5.5h
+
+rails g scaffold article user_id:integer text:string
+
+rails g model comment article_id:integer user_id:integer text:string
+rails g migration AddTitleToArticle title:string
+rails g model alert user_id:integer from_user_id:integer text:string url:string
+rails g model stock user_id:integer article_id:integer
+rails g model follow user_id:integer to_user_id:integer
+rails g model follow_tag user_id:integer tag:string
+

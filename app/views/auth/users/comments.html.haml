@@ -1,0 +1,22 @@
+%h1
+  =@user.email
+  さんのコメント一覧
+
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Title
+      %th comment
+      %th Time
+
+  %tbody
+    - @comments = @user.comments.order("created_at desc")
+    - @comments.each do |comment|
+      %tr
+        %td= user_link_tag(comment.user)
+        %td= link_to comment.article.title, comment.article
+        %td= comment.text
+        %td= time_ago(comment.created_at)
+

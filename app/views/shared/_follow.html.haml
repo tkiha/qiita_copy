@@ -1,0 +1,3 @@
+= form_for([:auth, user, user.follows.build(to_user_id: to_user.id)]) do |f|
+  = f.hidden_field :to_user_id
+  = f.submit "#{to_user.email}さんをフォローする"

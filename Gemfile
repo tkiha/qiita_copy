@@ -51,3 +51,5 @@ gem 'erb2haml'
 gem 'nested_form'
 gem 'kaminari'
 gem "letter_opener", "~> 1.1.0"
+gem 'acts-as-taggable-on', '~> 3.4'
+gem "redcarpet", "~> 2.3.0"

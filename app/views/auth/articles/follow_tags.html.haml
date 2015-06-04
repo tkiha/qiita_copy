@@ -1,0 +1,8 @@
+%h1
+  =@user.email
+  さんがフォローしているタグの記事
+タグ：
+=@user.follow_tags.pluck(:tag)
+%br
+
+=render 'shared/article_list', articles: Article.followed_tag(@user)

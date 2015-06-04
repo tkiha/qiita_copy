@@ -1,0 +1,9 @@
+%table
+  %thead
+    %tr
+      %th User
+
+  %tbody
+    - users.each do |user|
+      %tr
+        %td= link_to_if(user_signed_in?, user.email, auth_user_articles_path(user.id))

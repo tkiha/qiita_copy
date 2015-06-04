@@ -1,0 +1,24 @@
+%table
+  %thead
+    %tr
+      %th User
+      %th Title
+      %th Time
+      %th tags
+      %th
+      %th
+      %th
+
+  %tbody
+    - articles.order!("created_at desc")
+    - articles.each do |article|
+      %tr
+        %td= user_link_tag(article.user)
+        %td= article.title
+        %td= time_ago(article.created_at)
+        %td= render 'shared/article_tags', tag_list: article.tag_list
+
+        %td= link_to 'Show', article
+        - if user_signed_in? && current_user.id==article.user.id
+          %td= link_to 'Edit', edit_auth_user_article_path(current_user, article)
+          %td= link_to 'Destroy', [:auth, current_user, article], :method => :delete, :data => { :confirm => 'Are you sure?' }

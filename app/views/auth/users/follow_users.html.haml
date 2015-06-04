@@ -1,0 +1,5 @@
+%h1
+  =@user.email
+  さんがフォロー中のユーザー
+
+=render 'shared/user_list', users: @user.follow_users

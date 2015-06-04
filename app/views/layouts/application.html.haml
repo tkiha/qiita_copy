@@ -1,0 +1,35 @@
+!!!
+%html
+  %head
+    %title Qiita
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    = link_to "すべての記事", root_path
+    \|
+    - if user_signed_in?
+      = link_to "#{current_user.email}様", edit_user_registration_path
+      \|
+      = link_to "自分の記事", auth_user_articles_path(current_user)
+      \|
+      = link_to "フィード", feed_auth_user_articles_path(current_user)
+      \|
+      = link_to "通知", alerts_auth_user_path(current_user)
+      \|
+      = link_to '新規投稿', new_auth_user_article_path(current_user)
+      \|
+      = link_to "ログアウト", destroy_user_session_path, :method => :delete
+
+    - else
+      = link_to "アカウント作成", new_user_registration_path
+      \|
+      = link_to "ログイン", new_user_session_path
+      \|
+      %hr
+
+    %p{class: "notice"}
+      = notice
+    %p{class: "alert"}
+      = alert
+    = yield

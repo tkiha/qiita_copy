@@ -1,0 +1,28 @@
+%h1
+  =@user.email
+  さん
+
+
+  - if current_user.follow_user?(@user)
+    = render 'shared/unfollow', user: current_user, to_user:@user
+  - else
+    = render 'shared/follow', user: current_user, to_user:@user
+
+= link_to "フォロー中", follow_users_auth_user_path(@user)
+\|
+= link_to "フォロワー", followers_auth_user_path(@user)
+\|
+= link_to "フィード", feed_auth_user_articles_path(@user)
+\|
+= link_to "フォローしているユーザーの記事一覧", follows_auth_user_articles_path(@user)
+\|
+= link_to "フォローしているタグの記事一覧", follow_tags_auth_user_articles_path(@user)
+\|
+= link_to "ストックした記事一覧", stocks_auth_user_articles_path(@user)
+\|
+= link_to "投稿記事一覧", auth_user_articles_path(@user)
+\|
+= link_to "コメント一覧", comments_auth_user_path(@user)
+
+
+=render 'shared/article_list', articles: @user.articles

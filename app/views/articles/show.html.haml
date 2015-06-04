@@ -1,0 +1,28 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = user_link_tag(@article.user)
+%p
+  %b Title:
+  = @article.title
+  %br
+  %b Text:
+  = markdown @article.text
+
+  %b タグ:
+  = render 'shared/article_tags', tag_list: @article.tag_list
+
+  = render @article.comments
+
+- if user_signed_in?
+  = link_to 'Back', auth_user_articles_path(current_user)
+  = link_to 'コメントする', edit_auth_user_article_path(@article.user_id, @article)
+  - if current_user.article_stock?(@article)
+    = render 'shared/unstock', article: @article
+  - else
+    = render 'shared/stock', article: @article
+- else
+  = link_to 'Back', articles_path
+
+

@@ -1,0 +1,5 @@
+%h1
+  =@user.email
+  さんがフォローしているユーザーの記事
+
+=render 'shared/article_list', articles: Article.followed(@user)

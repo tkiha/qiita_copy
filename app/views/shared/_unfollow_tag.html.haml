@@ -1,0 +1,2 @@
+= form_for([:auth, user, user.follow_tags.find_by(tag: tag_text)],html: { method: :delete }) do |f|
+  = f.submit "タグをフォロー解除する"

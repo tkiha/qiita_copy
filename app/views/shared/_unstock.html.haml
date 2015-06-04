@@ -1,0 +1,2 @@
+= form_for([:auth,article.user, article, article.stocks.find_by(user_id: article.user_id)],html: { method: :delete }) do |f|
+  = f.submit "ストック解除する"
